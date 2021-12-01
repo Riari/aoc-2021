@@ -15,7 +15,9 @@ class Solution:
 
     def __read_input(self, input_filename: str) -> list[str]:
         file = open(f'input/{input_filename}', 'r')
-        return file.readlines()
+        input = file.readlines()
+        file.close()
+        return input
 
     def run(self):
         print(f'## Day {self.day}')
