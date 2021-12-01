@@ -1,3 +1,3 @@
-def getInput(day: str, ext: str = '.txt') -> list[str]:
-    file = open(f'input/{day}{ext}', 'r')
+def read_input(filename: str) -> list[str]:
+    file = open(f'input/{filename}', 'r')
     return file.readlines()

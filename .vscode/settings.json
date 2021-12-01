@@ -1,6 +1,7 @@
 {
-    "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
     "python.analysis.extraPaths": [
         "./src"
-    ]
+    ],
+    "nixEnvSelector.suggestion": false,
+    "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix"
 }

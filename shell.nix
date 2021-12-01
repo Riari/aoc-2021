@@ -1,5 +1,10 @@
-{ pkgs ? import <nixpkgs> {} }:
+with import <nixpkgs> {};
 let
-    aoc-2021 = pkgs.python3.withPackages (p: with p; []);
-in
-aoc-2021.env 
+  pythonEnv = python310.withPackages (p: [
+    p.tabulate
+  ]);
+in mkShell {
+  packages = [
+    pythonEnv
+  ];
+}
