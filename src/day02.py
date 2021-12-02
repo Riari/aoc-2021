@@ -1,11 +1,8 @@
-from re import match
 from utils.solution import Solution
 
 def parse_instruction(instruction: str) -> tuple:
-    m = match('(\w+) (\d)', instruction)
-    direction = m.group(1)
-    units = int(m.group(2))
-    return (direction, units)
+    (direction, units) = instruction.split()
+    return (direction, int(units))
 
 def part1(input: list[str]) -> int:
     x, y = 0, 0
