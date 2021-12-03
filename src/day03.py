@@ -1,4 +1,4 @@
-from enum import Enum
+from typing import Callable
 from utils.solution import Solution
 
 def part1(input: list[str]) -> int:
@@ -29,25 +29,17 @@ def part2(input: list[str]) -> int:
     oxygen_indices = range(width)
     co2_indices = range(width)
 
-    class RatingType(Enum):
-        OXYGEN = 1
-        CO2 = 2
-
-    def filter_rating(bits: tuple, indices: list[int], type: RatingType) -> list[int]:
-        filtered_bits = [c for j, c in enumerate(bits) if j in indices]
-        match type:
-            case RatingType.OXYGEN:
-                match_bit = '1' if filtered_bits.count('1') >= (len(filtered_bits) / 2) else '0'
-            case RatingType.CO2:
-                match_bit = '0' if filtered_bits.count('0') <= (len(filtered_bits) / 2) else '1'
-
+    def filter_rating(bits: tuple, indices: list[int], get_match_bit: Callable) -> list[int]:
+        match_bit = get_match_bit([c for j, c in enumerate(bits) if j in indices])
         return [j for j in indices if input[j][i] == match_bit]
 
     for i in range(height):
         if len(oxygen_indices) > 1:
-            oxygen_indices = filter_rating(reversed(rotated[i]), oxygen_indices, RatingType.OXYGEN)
+            oxygen_indices = filter_rating(reversed(rotated[i]), oxygen_indices,
+                lambda filtered_bits: '1' if filtered_bits.count('1') >= (len(filtered_bits) / 2) else '0')
         if len(co2_indices) > 1:
-            co2_indices = filter_rating(reversed(rotated[i]), co2_indices, RatingType.CO2)
+            co2_indices = filter_rating(reversed(rotated[i]), co2_indices, 
+                lambda filtered_bits: '0' if filtered_bits.count('0') <= (len(filtered_bits) / 2) else '1')
 
     oxygen_generator_rating = int(input[oxygen_indices[0]], 2)
     co2_scrubber_rating = int(input[co2_indices[0]], 2)
