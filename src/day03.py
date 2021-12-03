@@ -25,7 +25,6 @@ def part2(input: list[str]) -> int:
     rotated = list(zip(*input[::-1]))
     width = len(rotated[0])
     height = len(rotated)
-
     oxygen_indices = range(width)
     co2_indices = range(width)
 
