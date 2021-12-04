@@ -16,8 +16,9 @@ def solve(input: list[str], return_first_win: bool) -> int:
             boards[board_index].extend([int(i) for i in line.split()])
 
     marked_numbers = [set() for _ in range(len(boards))]
+    unmarked_numbers = []
     winning_boards = set()
-    winning_number: int = None
+    last_winning_number: int = None
     for a in range(len(numbers)):
         number = numbers[a]
         for i in range(len(boards)):
@@ -39,14 +40,14 @@ def solve(input: list[str], return_first_win: bool) -> int:
                 
                 if row.issubset(marked_numbers[i]) or column.issubset(marked_numbers[i]):
                     board_set = set(board)
-                    unmarked_numbers = board_set.symmetric_difference(marked_numbers[i])
+                    unmarked_numbers = list(board_set.symmetric_difference(marked_numbers[i]))
                     if return_first_win:
-                        return sum(list(unmarked_numbers)) * number
+                        return sum(unmarked_numbers) * number
 
-                    winning_number = number
                     winning_boards.add(i)
+                    last_winning_number = number
     else:
-        return sum(list(unmarked_numbers)) * winning_number
+        return sum(unmarked_numbers) * last_winning_number
 
 def part1(input: list[str]) -> int:
     return solve(input, True)
