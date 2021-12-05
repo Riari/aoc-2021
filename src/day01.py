@@ -22,5 +22,5 @@ def part2(input: list[int]) -> int:
     return count
 
 if __name__ == "__main__":
-    solution = Solution(1, part1, part2, 'day01.txt')
+    solution = Solution(1, part1, part2, 'day01.txt', int)
     solution.run()

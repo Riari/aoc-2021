@@ -46,5 +46,5 @@ def part2(input: list[str]) -> int:
     return oxygen_generator_rating * co2_scrubber_rating
 
 if __name__ == "__main__":
-    solution = Solution(3, part1, part2, 'day03.txt', str)
+    solution = Solution(3, part1, part2, 'day03.txt')
     solution.run()
