@@ -33,7 +33,7 @@ class Solution:
 
     def __read_input(self, input_filename: str, input_type = str) -> list:
         with open(f'input/{input_filename}', 'r') as f:
-            return list(map(input_type, f))
+            return list(map(input_type, [line.rstrip('\n') for line in f]))
 
     def run(self):
         print(f'## Day {self.day}')
