@@ -2,7 +2,7 @@
 
 My solutions for [Advent of Code 2021](https://adventofcode.com/2021/), written in Python 3.10.
 
-Solution files and boilerplate can be generated with `init.py`, e.g.:
+Solution files and boilerplate can be generated with `new.py`, e.g.:
 ```
 python3 new.py 1
 ```
