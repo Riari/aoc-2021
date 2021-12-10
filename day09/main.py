@@ -49,6 +49,6 @@ def part2(input: list[int]) -> int:
     return len(basins[0]) * len(basins[1]) * len(basins[2])
 
 if __name__ == "__main__":
-    solution = Solution(9, part1, part2, 'day09.txt')
-    solution.input = [[int(digit) for digit in line] for line in solution.input]
+    solution = Solution(9, part1, part2, (15, 1134))
+    solution.process_input(lambda input: [[int(digit) for digit in line] for line in input])
     solution.run()

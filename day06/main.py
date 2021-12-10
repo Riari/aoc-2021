@@ -16,5 +16,5 @@ def part2(input: list[str]) -> int:
     return solve(input, 256)
 
 if __name__ == "__main__":
-    solution = Solution(6, part1, part2, 'day06.txt')
+    solution = Solution(6, part1, part2, (5934, 26984457539))
     solution.run()

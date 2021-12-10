@@ -29,5 +29,5 @@ def part2(input: list[str]) -> int:
     return solve(input, True)
 
 if __name__ == "__main__":
-    solution = Solution(5, part1, part2, 'day05.txt')
+    solution = Solution(5, part1, part2, (5, 12))
     solution.run()

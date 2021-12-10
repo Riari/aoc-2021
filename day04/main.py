@@ -9,7 +9,7 @@ def solve(input: list[str], return_first_win: bool) -> int:
         line = input[i]
         if i == 0:
             numbers = [int(i) for i in line.split(',')]
-        elif line in ['\n', '\r\n']:
+        elif line == '':
             board_index += 1
             boards.append([])
         else:
@@ -56,5 +56,5 @@ def part2(input: list[str]) -> int:
     return solve(input, False)
 
 if __name__ == "__main__":
-    solution = Solution(4, part1, part2, 'day04.txt')
+    solution = Solution(4, part1, part2, (4512, 1924))
     solution.run()

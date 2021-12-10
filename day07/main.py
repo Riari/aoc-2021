@@ -10,6 +10,6 @@ def part2(input: list[int]) -> int:
     return sum([sum(range(abs(p - average) + 1)) for p in input])
 
 if __name__ == "__main__":
-    solution = Solution(7, part1, part2, 'day07.txt')
-    solution.input = sorted([int(x) for x in solution.input[0].split(',')])
+    solution = Solution(7, part1, part2, (37, 170))
+    solution.process_input(lambda input: sorted([int(x) for x in input[0].split(',')]))
     solution.run()

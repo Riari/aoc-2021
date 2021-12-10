@@ -37,5 +37,5 @@ def part2(input: list[str]) -> int:
     return total
 
 if __name__ == "__main__":
-    solution = Solution(8, part1, part2, 'day08.txt')
+    solution = Solution(8, part1, part2, (26, 61229))
     solution.run()
