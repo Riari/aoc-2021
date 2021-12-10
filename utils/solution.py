@@ -2,13 +2,19 @@ import os, time
 from typing import Callable
 from tabulate import tabulate
 
-class SolutionFunction:
+class Part:
+    number: int
     function: Callable
     result: int
     time: float
 
-    def __init__(self, function: Callable):
+    def __init__(self, number: int, function: Callable):
+        self.number = number
         self.function = function
+    
+    def test(self, input: list[str], expected: int):
+        result = self.function(input)
+        assert (result == expected), f'Part {self.number} test failed; expected {expected} and got {result}'
 
     def execute(self, input: list[str]):
         start = time.time()
@@ -21,23 +27,22 @@ class SolutionFunction:
 
 class Solution:
     day: int
-    part1: SolutionFunction
-    part2: SolutionFunction
-    expected: tuple[int]
+    part1: Part
+    part2: Part
     test_input: list[str]
+    test_results: tuple[int]
     personal_input: list[str]
 
-    def __init__(self, day: int, part1: Callable, part2: Callable, expected: tuple[int], input_type = str):
+    def __init__(self, day: int, part1: Callable, part2: Callable, test_results: tuple[int], input_type = str):
         self.day = day
-        self.part1 = SolutionFunction(part1)
-        self.part2 = SolutionFunction(part2)
-        self.expected = expected
+        self.part1 = Part(1, part1)
+        self.part2 = Part(2, part2)
         self.test_input = self.__read_input('test', input_type)
+        self.test_results = test_results
         self.personal_input = self.__read_input('personal', input_type)
 
     def __read_input(self, input_filename: str, input_type = str) -> list:
-        path = f'day{str(self.day).zfill(2)}/'
-        with open(os.path.join(path, f'{input_filename}.input'), 'r') as f:
+        with open(os.path.join(f'day{str(self.day).zfill(2)}', f'{input_filename}.input'), 'r') as f:
             return list(map(input_type, [line.rstrip('\n') for line in f]))
     
     def process_input(self, callback: Callable):
@@ -45,10 +50,8 @@ class Solution:
         self.personal_input = callback(self.personal_input)
 
     def run(self):
-        self.part1.execute(self.test_input)
-        self.part2.execute(self.test_input)
-        assert (self.part1.result == self.expected[0]), "Part 1 test failed"
-        assert (self.part2.result == self.expected[1]), "Part 2 test failed"
+        self.part1.test(self.test_input, self.test_results[0])
+        self.part2.test(self.test_input, self.test_results[1])
 
         print(f'## Day {self.day}')
         headers = ['', 'Part 1', 'Part 2']
