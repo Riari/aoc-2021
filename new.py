@@ -1,6 +1,7 @@
+#!/usr/bin/env python3
 import os, sys
 
-day = sys.argv[1]
+day = sys.argv[1] if len(sys.argv) > 1 else input("Enter day: ")
 dir = 'day' + day.zfill(2)
 path = os.path.join(os.getcwd(), dir)
 
