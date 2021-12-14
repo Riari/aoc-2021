@@ -47,7 +47,6 @@ def part1(input: list[list[int]]) -> int:
 def part2(input: list[list[int]]) -> int:
     return solve(input, lambda step, flashes, step_flashes: 100 + step if step_flashes == len(input) * len(input[0]) else 0)
 
-if __name__ == "__main__":
-    solution = Solution(11, part1, part2, (1656, 195))
-    solution.process_input(lambda input: [list(map(int, l)) for l in input])
-    solution.run()
+solution = Solution(11, part1, part2, (1656, 195))
+solution.process_input(lambda input: [list(map(int, l)) for l in input])
+solution.run()

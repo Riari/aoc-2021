@@ -27,7 +27,6 @@ def build_graph(input: list[str]) -> dict[list[str]]:
 
     return graph
 
-if __name__ == "__main__":
-    solution = Solution(12, part1, part2, (19, 103))
-    solution.process_input(build_graph)
-    solution.run()
+solution = Solution(12, part1, part2, (19, 103))
+solution.process_input(build_graph)
+solution.run()

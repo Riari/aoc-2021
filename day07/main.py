@@ -9,7 +9,6 @@ def part2(input: list[int]) -> int:
     average = int(sum(input) / len(input))
     return sum([sum(range(abs(p - average) + 1)) for p in input])
 
-if __name__ == "__main__":
-    solution = Solution(7, part1, part2, (37, 170))
-    solution.process_input(lambda input: sorted([int(x) for x in input[0].split(',')]))
-    solution.run()
+solution = Solution(7, part1, part2, (37, 170))
+solution.process_input(lambda input: sorted([int(x) for x in input[0].split(',')]))
+solution.run()

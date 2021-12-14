@@ -54,6 +54,5 @@ def part2(input: list[str]) -> int:
         print('\n')
     return 0
 
-if __name__ == "__main__":
-    solution = Solution(13, part1, part2, (17, 0))
-    solution.run()
+solution = Solution(13, part1, part2, (17, 0))
+solution.run()

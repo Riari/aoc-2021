@@ -31,6 +31,5 @@ def part1(input: list[str]) -> int:
 def part2(input: list[str]) -> int:
     return solve(input, False, {')': 1, ']': 2, '}': 3, '>': 4})
 
-if __name__ == "__main__":
-    solution = Solution(10, part1, part2, (26397, 288957))
-    solution.run()
+solution = Solution(10, part1, part2, (26397, 288957))
+solution.run()

@@ -22,12 +22,5 @@ def solve(input: list[str], include_diagonals: bool) -> int:
 
     return sum(c > 1 for c in counter.values())
 
-def part1(input: list[str]) -> int:
-    return solve(input, False)
-
-def part2(input: list[str]) -> int:
-    return solve(input, True)
-
-if __name__ == "__main__":
-    solution = Solution(5, part1, part2, (5, 12))
-    solution.run()
+solution = Solution(5, lambda input: solve(input, False), lambda input: solve(input, True), (5, 12))
+solution.run()

@@ -23,12 +23,5 @@ def solve(input: list[str], steps: int) -> int:
 
     return 1 + max(chars.values()) - min(chars.values())
 
-def part1(input: list[str]) -> int:
-    return solve(input, 10)
-
-def part2(input: list[str]) -> int:
-    return solve(input, 40)
-
-if __name__ == "__main__":
-    solution = Solution(14, part1, part2, (1588, 2188189693529))
-    solution.run()
+solution = Solution(14, lambda input: solve(input, 10), lambda input: solve(input, 40), (1588, 2188189693529))
+solution.run()

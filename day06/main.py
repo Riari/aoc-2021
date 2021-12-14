@@ -9,12 +9,5 @@ def solve(input: list[str], days: int) -> int:
 
     return sum(state)
 
-def part1(input: list[str]) -> int:
-    return solve(input, 80)
-
-def part2(input: list[str]) -> int:
-    return solve(input, 256)
-
-if __name__ == "__main__":
-    solution = Solution(6, part1, part2, (5934, 26984457539))
-    solution.run()
+solution = Solution(6, lambda input: solve(input, 80), lambda input: solve(input, 256), (5934, 26984457539))
+solution.run()

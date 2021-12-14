@@ -21,6 +21,5 @@ def part2(input: list[int]) -> int:
 
     return count
 
-if __name__ == "__main__":
-    solution = Solution(1, part1, part2, (7, 5), int)
-    solution.run()
+solution = Solution(1, part1, part2, (7, 5), int)
+solution.run()

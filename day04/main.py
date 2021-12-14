@@ -49,12 +49,5 @@ def solve(input: list[str], return_first_win: bool) -> int:
     else:
         return sum(unmarked_numbers) * last_winning_number
 
-def part1(input: list[str]) -> int:
-    return solve(input, True)
-
-def part2(input: list[str]) -> int:
-    return solve(input, False)
-
-if __name__ == "__main__":
-    solution = Solution(4, part1, part2, (4512, 1924))
-    solution.run()
+solution = Solution(4, lambda input: solve(input, True), lambda input: solve(input, False), (4512, 1924))
+solution.run()
