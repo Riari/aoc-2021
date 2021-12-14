@@ -12,9 +12,8 @@ def solve(input: list[str], steps: int) -> int:
     for _ in range(steps):
         p = defaultdict(int)
         for pair in polymer:
-            if pair in rules:
-                for insert in rules[pair]:
-                    p[insert] += polymer[pair]
+            for insert in rules[pair]:
+                p[insert] += polymer[pair]
 
         polymer = p
 
