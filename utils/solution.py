@@ -11,7 +11,7 @@ class Part:
     def __init__(self, number: int, function: Callable):
         self.number = number
         self.function = function
-    
+
     def test(self, input: list[str], expected: int):
         result = self.function(input)
         assert (result == expected), f'Part {self.number} test failed; expected {expected} and got {result}'
@@ -44,7 +44,7 @@ class Solution:
     def __read_input(self, input_filename: str, input_type = str) -> list:
         with open(os.path.join(f'day{str(self.day).zfill(2)}', f'{input_filename}.input'), 'r') as f:
             return list(map(input_type, [line.rstrip('\n') for line in f]))
-    
+
     def process_input(self, callback: Callable):
         self.test_input = callback(self.test_input)
         self.personal_input = callback(self.personal_input)
