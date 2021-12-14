@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counter, defaultdict
 from utils.solution import Solution
 
 def solve(input: list[str], steps: int) -> int:
@@ -10,7 +10,7 @@ def solve(input: list[str], steps: int) -> int:
     polymer = Counter(zip(input[0], input[0][1:]))
 
     for _ in range(steps):
-        p = Counter()
+        p = defaultdict(int)
         for pair in polymer:
             if pair in rules:
                 for insert in rules[pair]:
@@ -18,12 +18,11 @@ def solve(input: list[str], steps: int) -> int:
 
         polymer = p
 
-    chars = Counter()
+    chars = defaultdict(int)
     for pair in polymer:
         chars[pair[0]] += polymer[pair]
 
-    common = chars.most_common()
-    return 1 + common[0][1] - common[-1][1]
+    return 1 + max(chars.values()) - min(chars.values())
 
 def part1(input: list[str]) -> int:
     return solve(input, 10)
