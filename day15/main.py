@@ -52,8 +52,5 @@ def solve(input: list[list[str]], grid_size: int = 1):
 
     return distances[(width - 1, height - 1)]
 
-def part2(input: list[str]) -> int:
-    return 0
-
 solution = Solution(15, solve, lambda input: solve(input, 5), (40, 315))
 solution.run()
