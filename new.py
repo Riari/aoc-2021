@@ -20,9 +20,8 @@ def part1(input: list[str]) -> int:
 def part2(input: list[str]) -> int:
     return 0
 
-if __name__ == "__main__":
-    solution = Solution({day}, part1, part2, (0, 0))
-    solution.run()
+solution = Solution({day}, part1, part2, (0, 0))
+solution.run()
 '''.format(day=day))
 f.close()
 
