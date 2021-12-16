@@ -1,27 +1,25 @@
-from collections import defaultdict
 from queue import PriorityQueue
 from utils.solution import Solution
 
 def solve(input: list[list[str]], grid_size: int = 1):
     grid = [list(map(int, line)) for line in input]
-    width, height = len(grid[0]), len(grid)
     queue = PriorityQueue()
-    distances = {}
-    visited = defaultdict(bool)
+    distances = {(0, 0): 0}
 
     if grid_size > 1:
+        width, height = len(grid[0]), len(grid)
         for _ in range((grid_size - 1) * height):
             grid.append([])
 
-    for tile_y in range(grid_size):
-        for tile_x in range(grid_size):
-            if tile_y == 0 and tile_x == 0: continue
-            for y in range(height):
-                for x in range(width):
-                    cell = grid[y][x]
-                    new = cell + tile_y + tile_x
-                    if new > 9: new = new - 9
-                    grid[tile_y * height + y].append(new)
+        for tile_y in range(grid_size):
+            for tile_x in range(grid_size):
+                if tile_y == 0 and tile_x == 0: continue
+                for y in range(height):
+                    for x in range(width):
+                        cell = grid[y][x]
+                        new = cell + tile_y + tile_x
+                        if new > 9: new = new - 9
+                        grid[tile_y * height + y].append(new)
 
     width, height = len(grid[0]), len(grid)
     queue.put((0, (0, 0)))
@@ -44,7 +42,6 @@ def solve(input: list[list[str]], grid_size: int = 1):
         priority, at = queue.get()
         neighbours = get_neighbours(at)
         for n in neighbours:
-            if visited[n] or n[0] == 0 and n[1] == 0: continue
             p = priority + grid[n[1]][n[0]]
             if distances[n] > p:
                 distances[n] = p
