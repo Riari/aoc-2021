@@ -26,6 +26,6 @@ solution.run()
 f.close()
 
 for file in ['personal.input', 'readme.md', 'test.input']:
-    os.mknod(os.path.join(path, file))
+    open(os.path.join(path, file), 'w').close()
 
 exit(f'{dir} created')

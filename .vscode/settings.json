@@ -3,5 +3,8 @@
     "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
     "terminal.integrated.env.linux": {
         "PYTHONPATH": "${workspaceFolder}"
+    },
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}"
     }
 }
