@@ -1,16 +1,6 @@
 from functools import reduce
 from utils.solution import Solution
 
-class Packet:
-    version: int
-    type_id: int
-    value: int
-
-    def __init__(self, version: int, type_id: int):
-        self.packets = []
-        self.version = version
-        self.type_id = type_id
-
 class Decoder:
     sequence: list[str]
     pop_count: int
@@ -33,12 +23,11 @@ class Decoder:
     def decode_bits(self, length: int) -> int:
         return int(self.get_bits(length), 2)
 
-    def decode(self) -> Packet:
-        packet = Packet(self.decode_bits(3), self.decode_bits(3))
-        self.version_sum += packet.version
+    def decode(self) -> int:
+        version, type_id = self.decode_bits(3), self.decode_bits(3)
+        self.version_sum += version
 
-        packet.value = self.decode_literal() if packet.type_id == 4 else self.decode_operator(packet.type_id)
-        return packet
+        return self.decode_literal() if type_id == 4 else self.decode_operator(type_id)
 
     def decode_literal(self):
         last_group = False
@@ -57,10 +46,10 @@ class Decoder:
             case 0: # Length
                 length = self.decode_bits(15)
                 start_at = self.pop_count
-                while self.pop_count < start_at + length: values.append(self.decode().value)
+                while self.pop_count < start_at + length: values.append(self.decode())
             case 1: # Count
                 count = self.decode_bits(11)
-                for _ in range(count): values.append(self.decode().value)
+                for _ in range(count): values.append(self.decode())
 
         v: int = 0
         match type_id:
@@ -81,7 +70,7 @@ def part1(input: list[str]) -> int:
 
 def part2(input: list[str]) -> int:
     decoder = Decoder(input[0])
-    return decoder.decode().value
+    return decoder.decode()
 
 solution = Solution(16, part1, part2, (6, 2021))
 solution.run()
