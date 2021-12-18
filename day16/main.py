@@ -30,12 +30,11 @@ class Decoder:
         return self.decode_literal() if type_id == 4 else self.decode_operator(type_id)
 
     def decode_literal(self):
-        last_group = False
         groups = ''
-        while not last_group:
+        while True:
             group = self.get_bits(5)
             groups += group[1:]
-            if group.startswith('0'): last_group = True
+            if group.startswith('0'): break
 
         return int(groups, 2)
 
