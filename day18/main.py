@@ -65,10 +65,10 @@ def magnitude(x):
     return 3 * magnitude(x[0]) + 2 * magnitude(x[1])
 
 def part1(input: list) -> int:
-    return magnitude(reduce(add, input.copy()))
+    return magnitude(reduce(add, input))
 
 def part2(input: list) -> int:
-    return max(magnitude(add(a, b)) for a, b in itertools.permutations(input.copy(), 2))
+    return max(magnitude(add(a, b)) for a, b in itertools.permutations(input, 2))
 
 solution = Solution(18, part1, part2, (4140, 3993))
 solution.process_input(lambda input: [json.loads(line) for line in input])
