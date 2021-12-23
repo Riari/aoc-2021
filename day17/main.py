@@ -1,24 +1,6 @@
 from __future__ import annotations
 from utils.solution import Solution
-
-class Vector2:
-    x: int
-    y: int
-
-    def __init__(self, x: int, y: int):
-        self.x = x
-        self.y = y
-
-    def __add__(self, vector: Vector2) -> Vector2:
-        self.x += vector.x
-        self.y += vector.y
-        return self
-
-    def __str__(self) -> str:
-        return f'{self.x},{self.y}'
-
-    def __repr__(self) -> str:
-        return f'Vector2({self.__str__()})'
+from utils.vector import Vector2
 
 def part1(input: list[str]) -> int:
     min_y = int(input[0].split('..')[1].split(', y=')[1])
