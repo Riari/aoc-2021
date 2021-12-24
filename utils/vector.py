@@ -28,9 +28,15 @@ class Vector3:
         self.x = x
         self.y = y
         self.z = z
+    
+    def __eq__(self, other: Vector3) -> bool:
+        return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __str__(self) -> str:
         return f'({self.x}, {self.y}, {self.z})'
 
     def __repr__(self) -> str:
         return self.__str__()
+
+    def __hash__(self) -> int:
+        return hash((self.x, self.y, self.z))
