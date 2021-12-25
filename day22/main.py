@@ -17,11 +17,13 @@ class Cuboid:
     x: range
     y: range
     z: range
+    state: bool
 
-    def __init__(self, x: range, y: range, z: range):
+    def __init__(self, x: range, y: range, z: range, state: bool):
         self.x = x
         self.y = y
         self.z = z
+        self.state = state
     
     def get_volume(self):
         x = self.x.stop - self.x.start
@@ -61,14 +63,15 @@ def solve(steps: list[Step], init_region = range(-10000, 10000)) -> int:
             if step.z.start not in init_region or step.z.stop - 1 not in init_region:
                 continue
 
-        cuboid = Cuboid(step.x, step.y, step.z)
+        cuboid = Cuboid(step.x, step.y, step.z, step.state)
         if step.state:
             volume = cuboid.get_volume()
             exclude = []
             for c in cuboids:
                 intersection = cuboid.get_intersection_volume(c, exclude)
                 volume -= intersection
-                exclude.append(c)
+                if not c.state:
+                    exclude.append(c)
 
             on += volume
 
