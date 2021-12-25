@@ -22,25 +22,37 @@ class Cuboid:
         self.x = x
         self.y = y
         self.z = z
+    
+    def get_volume(self):
+        x = self.x.stop - self.x.start
+        y = self.y.stop - self.y.start
+        z = self.z.stop - self.z.start
 
-    def intersects_with(self, other: Cuboid) -> bool:
-        has_x = other.x.start in self.x or other.x.stop - 1 in self.x
-        if has_x: return True
-        has_y = other.y.start in self.y or other.y.stop - 1 in self.y
-        if has_y: return True
-        return other.z.start in self.z or other.z.stop - 1 in self.z
+        return x * y * z
 
-    def split_by(self, other: Cuboid) -> tuple:
-        # TODO: split into multiple cuboids, minus other
-        return ()
+    def get_intersection_volume(self, other: Cuboid, exclude: list[Cuboid]) -> int:
+        exclude_x = [x for c in exclude for x in c.x]
+        exclude_y = [y for c in exclude for y in c.y]
+        exclude_z = [z for c in exclude for z in c.z]
+
+        x = sum([1 for i in other.x if i in self.x and i not in exclude_x])
+        y = sum([1 for i in other.y if i in self.y and i not in exclude_y])
+        z = sum([1 for i in other.z if i in self.z and i not in exclude_z])
+
+        volume = 0
+        if x > 0 and y > 0 and z > 0:
+            volume = x * y * z
+
+        return volume
 
     def __hash__(self) -> int:
         return hash((self.x, self.y, self.z))
 
 def solve(steps: list[Step], init_region = range(-10000, 10000)) -> int:
-    reactor: set[Cuboid] = set()
+    on = 0
+    cuboids = []
     init_region_only = init_region.stop < 10000
-    for step in steps:
+    for step in reversed(steps):
         if init_region_only:
             if step.x.start not in init_region or step.x.stop - 1 not in init_region:
                 continue
@@ -50,11 +62,19 @@ def solve(steps: list[Step], init_region = range(-10000, 10000)) -> int:
                 continue
 
         cuboid = Cuboid(step.x, step.y, step.z)
-        for c in reactor:
-            # TODO: determine if cuboid intersects c. if it does, dissect c by cuboid, insert the resulting cuboids into the set. if step.state == True, insert cuboid into the set too.
-            pass
+        if step.state:
+            volume = cuboid.get_volume()
+            exclude = []
+            for c in cuboids:
+                intersection = cuboid.get_intersection_volume(c, exclude)
+                volume -= intersection
+                exclude.append(c)
 
-    return len(reactor)
+            on += volume
+
+        cuboids.append(cuboid)
+
+    return on
 
 def process_input(input: list[str]) -> list[Step]:
     steps = []
