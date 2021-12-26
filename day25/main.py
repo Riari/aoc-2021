@@ -2,22 +2,14 @@ from copy import copy
 from utils.solution import Solution
 
 def flip(cucumbers: list[str]) -> list[str]:
-    new = []
-    for x in range(len(cucumbers[0])):
-        row = ''
-        for y in range(len(cucumbers)):
-            row += cucumbers[y][x]
-
-        new.append(row)
-
-    cucumbers = new
+    return [''.join(line[i] for line in cucumbers) for i in range(len(cucumbers[0]))]
 
 def move(cucumbers: list[str], c: str) -> bool:
     moved = False
     for i in range(len(cucumbers)):
-        line = cucumbers[i] + cucumbers[i][0]
+        line = cucumbers[i] + cucumbers[i][0] if cucumbers[i].startswith('.') else cucumbers[i]
         replace = line.replace(c + '.', '.' + c)
-        line = replace[-1] + replace[1:-1]
+        line = replace[-1] + replace[1:-1] if len(line) > len(cucumbers[i]) else replace
         if cucumbers[i] != line:
             cucumbers[i] = line
             moved = True
@@ -32,7 +24,7 @@ def part1(input: list[str]) -> int:
         moving = False
         for c in ['>', 'v']:
             if move(cucumbers, c): moving = True
-            flip(cucumbers)
+            cucumbers = flip(cucumbers)
 
         i += 1
 
